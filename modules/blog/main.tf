@@ -48,10 +48,8 @@ module "blog_autoscaling" {
 
 # Attach the ASG created by the module to the ALB Target Group(s)
 resource "aws_autoscaling_attachment" "blog" {
-  for_each = toset(module.blog_alb.target_group_arns)
-
   autoscaling_group_name = module.blog_autoscaling.autoscaling_group_name
-  lb_target_group_arn   = each.value
+  lb_target_group_arn    = module.blog_alb.target_group_arns[0]
 }
 
 module "blog_alb" {
