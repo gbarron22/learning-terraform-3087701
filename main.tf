@@ -51,7 +51,7 @@ resource "aws_autoscaling_attachment" "blog" {
   for_each = toset(module.blog_alb.target_group_arns)
 
   autoscaling_group_name = module.blog_autoscaling.autoscaling_group_name
-  alb_target_group_arn   = each.value
+  lb_target_group_arn   = each.value
 }
 
 module "blog_alb" {
